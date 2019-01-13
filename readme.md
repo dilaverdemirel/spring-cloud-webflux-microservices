@@ -13,7 +13,7 @@ If you want to build and run the project, required Java 8 and Docker.
   - Gateway
   - ServiceRegistry
 
-![N](https://github.com/dilaverdemirel/spring-cloud-webflux-microservices/tree/master/src/main/documents/diagram.png)
+![N](https://github.com/dilaverdemirel/spring-cloud-webflux-microservices/raw/master/documents/diagram.png)
 
 ### Build and Run and Monitor
 Before run the project you need a Gmail account. And than you must edit docker-compose.yml file. You must replace parameters below in docker-compose.yml file;
