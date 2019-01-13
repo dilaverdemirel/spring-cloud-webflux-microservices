@@ -1,0 +1,41 @@
+server:
+  port: 7004
+  
+spring:
+  application:
+    name: email-service
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1/test
+  mail:
+    protocol: smtp
+    host: smtp.gmail.com
+    port: 465
+    defaultEncoding: UTF-8
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          from: info@orderservice.com.tr
+          auth: true
+          host: smtp.gmail.com
+          port: 465
+          starttls:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+
+---
+spring:
+  profiles: docker
+  data:
+    mongodb:
+      uri: mongodb://mongodb/test
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/

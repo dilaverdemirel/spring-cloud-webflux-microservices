@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo
+    hostname: mongodb
+    ports:
+    - "27017:27017"
+  registry:
+    image: ddemirel-scwfm-services/service-registry
+    environment:
+      SPRING_PROFILE: docker
+      JAVA_OPTS: -Xms256m -Xmx512m
+    ports:
+    - "8761:8761"
+  gateway:
+    image: ddemirel-scwfm-services/gateway
+    environment:
+      SPRING_PROFILE: docker
+      JAVA_OPTS: -Xms256m -Xmx512m
+    ports:
+    - "7000:7000"
+  email-service:
+    image: ddemirel-scwfm-services/email-service
+    environment:
+      SPRING_PROFILE: docker
+      JAVA_OPTS: -Xms256m -Xmx512m -Dspring.mail.username= -Dspring.mail.password=
+    ports:
+    - "7004:7004"
+  order-service-1:
+    image: ddemirel-scwfm-services/order-service
+    environment:
+      SPRING_PROFILE: docker
+      JAVA_OPTS: -Xms256m -Xmx512m
+    ports:
+    - "7002:7002"
+  order-service-2:
+    image: ddemirel-scwfm-services/order-service
+    environment:
+      SPRING_PROFILE: docker
+      JAVA_OPTS: -Xms256m -Xmx512m -Dserver.port=7012
+    ports:
+    - "7012:7012"
+  user-service:
+    image: ddemirel-scwfm-services/user-service
+    environment:
+      SPRING_PROFILE: docker
+      JAVA_OPTS: -Xms256m -Xmx512m
+    ports:
+    - "7003:7003"

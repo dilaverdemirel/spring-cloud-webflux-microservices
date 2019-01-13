@@ -1,0 +1,40 @@
+server:
+  port: 7000
+    
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+              
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: order-service
+        uri: lb://order-service
+        predicates:
+        - Path=/order/**
+        filters:
+        - RewritePath=/order/(?<path>.*), /$\{path}
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+        filters:
+        - RewritePath=/user/(?<path>.*), /$\{path}
+
+---
+spring:
+  profiles: docker
+
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/

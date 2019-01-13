@@ -1,0 +1,23 @@
+server:
+  port: 7003
+  
+spring:
+  application:
+    name: user-service
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1/test
+
+---
+spring:
+  profiles: docker
+  data:
+    mongodb:
+      uri: mongodb://mongodb/test
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/
